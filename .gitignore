@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Custom
+InventoryManager/.vs/
+InventoryManager/InventoryManager/
+InventoryManager/x64
