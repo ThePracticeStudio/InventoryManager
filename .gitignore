@@ -32,6 +32,6 @@
 *.app
 
 # Custom
-/.vs
-/InventoryManager/x64
-/InventoryManager/Debug
+InventoryManager/.vs/
+InventoryManager/InventoryManager/
+InventoryManager/x64/
