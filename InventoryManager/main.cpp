@@ -24,12 +24,15 @@ public:
 	std::vector<Item>Items;
 
 	int addItem(const std::string& name, int qty, int &Index) {
+
+		// If there are no items, it directly creates a new one
 		if (Items.size() == 0) {
 			Item newItem(name, qty);
 			Items.push_back(newItem);
 			return 0;
 		}
 
+		// If there's an item with the same name given by the user, it adds its quantity and saves the item's index
 		for (int i = 0; i < Items.size(); ++i) {
 			if (Items[i].name == name) {
 				Items[i].quantity += qty;
@@ -38,34 +41,48 @@ public:
 			}
 		}
 
+		// Else, creates a new one
 		Item newItem(name, qty);
 		Items.push_back(newItem);
 
 		return 0;
+
+		// Exit codes
+		// 0: new item was created
+		// 1: quantity was added to an item
 	}
 
 	int removeItem(const std::string& name, int qty, int& Index) {
 		int sub;
 
+		// If there's at least 1 item
 		if (Items.size() > 0) {
 			for (int i = 0; i < Items.size(); ++i) {
-				if (Items[i].name == name) {
+				if (Items[i].name == name) { // If item was found
 					sub = Items[i].quantity - qty;
-					if (sub > 0) {
+					// If substraction between the item's quantity and user's quantity
+					if (sub > 0) { // is greater than 0, it substracts user's quantity to item's quantity
 						Items[i].quantity -= qty;
 						Index = i;
 						return 0;
 					}
-					else if (sub == 0) {
+					else if (sub == 0) { // is 0, it removes the item
 						Items.erase(Items.begin() + i);
 						return 1;
 					}
-					return -1;
+					return -1; // else, error (negative quantity)
 				}
 			}
 		}
 
+		// Else, error (item not found)
 		return -2;
+
+		// Exit codes
+		// 0: item's quantity was reduced
+		// 1: item was removed
+		// -1: negative quantity (error)
+		// -2: item was not found (error)
 	}
 
 	void printInventory() {
